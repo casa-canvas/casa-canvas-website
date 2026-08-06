@@ -254,6 +254,44 @@
       F &nbsp; 02248 445507<br>
       M&nbsp; 0172 2908038</p>
     </div>
+    <form class="booking-form" onsubmit="return sendBookingMail(this)">
+      <p class="form-title"><strong>Buchungsanfrage</strong></p>
+      <div class="form-row">
+        <label>Anreise
+          <input type="date" name="anreise" required>
+        </label>
+        <label>Abreise
+          <input type="date" name="abreise" required>
+        </label>
+      </div>
+      <div class="form-row">
+        <label>Personen
+          <select name="personen" required>
+            <option value="" selected disabled>Bitte wählen</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </label>
+        <label class="form-check">
+          <input type="checkbox" name="hund"> Wir bringen einen Hund mit
+        </label>
+      </div>
+      <div class="form-row">
+        <label>Name
+          <input type="text" name="gast" required autocomplete="name">
+        </label>
+        <label>Telefon (optional)
+          <input type="tel" name="telefon" autocomplete="tel">
+        </label>
+      </div>
+      <label>Nachricht (optional)
+        <textarea name="nachricht" rows="4"></textarea>
+      </label>
+      <button type="submit" class="map-load">Anfrage per E-Mail senden</button>
+      <p class="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit einer vorbereiteten Anfrage an hello@casa-canvas.rentals — über die Website selbst werden keine Daten übertragen.</p>
+    </form>
     <div class="contact-block">
       <p><a href="mailto:hello@casa-canvas.rentals">hello@casa-canvas.rentals</a></p>
       <p>0172 2908038</p>
@@ -268,6 +306,34 @@
 </footer>
 
 <script>
+  // The booking form has no backend: submitting builds a mailto: link,
+  // so the visitor's own mail program opens with a prefilled enquiry.
+  function sendBookingMail(f) {
+    function d(v) {
+      var p = v.split('-');
+      return p[2] + '.' + p[1] + '.' + p[0];
+    }
+    if (f.abreise.value <= f.anreise.value) {
+      alert('Das Abreisedatum muss nach dem Anreisedatum liegen.');
+      return false;
+    }
+    var body = 'Guten Tag,\n\n' +
+      'wir möchten Casa Canvas gerne anfragen:\n\n' +
+      'Anreise: ' + d(f.anreise.value) + '\n' +
+      'Abreise: ' + d(f.abreise.value) + '\n' +
+      'Personen: ' + f.personen.value + '\n' +
+      'Hund: ' + (f.hund.checked ? 'ja (1 Hund)' : 'nein') + '\n\n' +
+      'Name: ' + f.gast.value + '\n' +
+      'Telefon: ' + (f.telefon.value || '—') + '\n' +
+      (f.nachricht.value ? '\nNachricht:\n' + f.nachricht.value + '\n' : '') +
+      '\nViele Grüße\n' + f.gast.value;
+    var subject = 'Buchungsanfrage Casa Canvas ' +
+      d(f.anreise.value) + ' – ' + d(f.abreise.value);
+    location.href = 'mailto:hello@casa-canvas.rentals' +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(body);
+    return false;
+  }
   // The map loads only after explicit consent — before the click the
   // page makes no external requests. Leaflet is self-hosted; only the
   // tile images come from the CARTO/OpenStreetMap servers.
