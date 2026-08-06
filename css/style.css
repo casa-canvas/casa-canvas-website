@@ -1,0 +1,538 @@
+/* ============================================================
+   Casa Canvas — casa-canvas.de
+   Single stylesheet for the whole site.
+   ============================================================ */
+
+/* ---------- Fonts (self-hosted, see fonts/fonts.css) ---------- */
+
+:root {
+  /* Theme colors */
+  --c-text: #363636;          /* body text */
+  --c-heading: #605e5e;       /* headings */
+  --c-line: #bababa;          /* divider lines */
+  --c-beige: #e6e5db;         /* header pills, icon band */
+  --c-nav: #696969;           /* nav item text */
+  --c-dark: #323232;          /* logo text, buttons */
+
+  --f-display: "Playfair Display", serif;
+  --f-body: "Raleway", sans-serif;
+  --f-subtitle: "Mulish", sans-serif;
+  --f-nav: "Jost", sans-serif;
+  --f-logo: "Mulish", sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 97px; }
+
+body {
+  font-family: var(--f-body);
+  font-weight: 400;
+  color: var(--c-text);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+/* ============================ Header ============================ */
+
+.site-header {
+  height: 97px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 66px 0 80px;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 161px;
+  height: 46px;
+  border-radius: 100px;
+  background: var(--c-beige);
+  font-family: var(--f-logo);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--c-dark);
+  text-decoration: none;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+.logo-pill:hover { background: var(--c-dark); color: #fff; }
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 5px 24px;
+  border-radius: 80px;
+  background: var(--c-beige);
+}
+.main-nav a {
+  font-family: var(--f-nav);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--c-nav);
+  text-decoration: none;
+  padding: 0 16px;
+  white-space: nowrap;
+  transition: color 0.4s ease;
+}
+.main-nav a:hover, .main-nav a.active { color: #000; }
+
+/* Mobile menu button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+}
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--c-dark);
+  margin: 5px 0 5px auto;
+}
+.menu-toggle span:nth-child(1) { width: 26px; }
+.menu-toggle span:nth-child(2) { width: 18px; }
+.menu-toggle span:nth-child(3) { width: 26px; }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 100;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--f-nav);
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  color: var(--c-dark);
+  text-decoration: none;
+}
+.mobile-menu .close-menu {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: 0;
+  font-size: 28px;
+  font-family: var(--f-subtitle);
+  font-weight: 300;
+  color: var(--c-dark);
+  cursor: pointer;
+}
+
+/* ============================ Hero ============================ */
+
+/* Fixed-height hero — the image may crop/zoom with the browser width.
+   (All other photos keep their natural ratio.) */
+.hero {
+  position: relative;
+  height: 751px;
+  overflow: hidden;
+}
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.hero::after {           /* subtle darkening overlay */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.10);
+}
+.hero-text {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.hero-title {
+  margin-top: 48px;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 90px;
+  line-height: 1.4;
+  color: #fff;
+}
+.hero-sub {
+  margin-top: 148px;
+  font-family: var(--f-subtitle);
+  font-weight: 300;
+  font-size: 41px;
+  line-height: 1.1;
+  color: #fff;
+  max-width: 560px;
+}
+
+/* ======================= Section furniture ====================== */
+
+.divider {
+  width: 1px;
+  height: 70px;
+  background: var(--c-line);
+  margin: 45px auto 0;
+}
+
+.section-title {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: normal;
+  letter-spacing: 0.1em;
+  color: var(--c-heading);
+  text-align: center;
+  margin: 52px auto 0;
+  max-width: 600px;
+}
+
+.section-text {
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 582px;
+  margin: 56px auto 0;
+}
+
+/* ========================= Photo gallery ======================== */
+
+.intro-gallery {
+  max-width: 980px;
+  margin: 107px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 10px;
+}
+.intro-gallery .row { display: flex; gap: 15px; }
+.intro-gallery .row > div { overflow: hidden; }
+/* flex grow = natural aspect ratio × 1000: both images in a row come
+   out equally tall without any cropping */
+.intro-gallery .row:nth-child(1) .narrow { flex: 667; }    /* 900 × 1350 */
+.intro-gallery .row:nth-child(1) .wide   { flex: 1500; }   /* 1400 × 933 */
+.intro-gallery .row:nth-child(2) .wide   { flex: 1500; }   /* 1400 × 933 */
+.intro-gallery .row:nth-child(2) .narrow { flex: 1499; }   /* 1000 × 667 */
+.intro-gallery .row:nth-child(3) .narrow { flex: 2123; }   /* 900 × 424 */
+.intro-gallery .row:nth-child(3) .wide   { flex: 1500; }   /* 1400 × 933 */
+.intro-gallery img { width: 100%; height: auto; }
+
+/* ===================== Ausstattung masonry ====================== */
+
+.masonry {
+  max-width: 1440px;              /* raster stops growing beyond the design width */
+  margin: 58px auto 0;
+  padding: 0 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 57px;
+}
+.masonry .row { display: flex; gap: 56px; }
+.masonry .row > div { overflow: hidden; }
+.masonry img { width: 100%; height: auto; }
+/* flex grow = natural aspect ratio × 1000 (no cropping, equal row heights) */
+.m-r1a { flex: 1499; }   /* 1400 × 934 */
+.m-r1b { flex: 1139; }   /* 1200 × 1054 */
+.m-r2a { flex: 667; }    /* 1000 × 1500 */
+.m-r2b { flex: 1500; }   /* 1600 × 1067 */
+.m-r3a { flex: 1499; }   /* 1300 × 867 */
+.m-r3b { flex: 1499; }   /* 1300 × 867 */
+
+/* ========================= Icon band ============================ */
+
+.icon-band {
+  margin-top: 110px;
+  background: var(--c-beige);
+  padding: 75px 0 78px;
+  position: relative;
+}
+.icon-band .viewport {
+  max-width: 1216px;
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.icon-band .viewport::-webkit-scrollbar { display: none; }
+.icon-band .track {
+  display: flex;
+  gap: 0;
+}
+.icon-item {
+  flex: 0 0 248px;
+  text-align: center;
+}
+.icon-item img {
+  width: 248px;
+  height: 248px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.icon-item p {
+  font-family: var(--f-subtitle);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--c-text);
+  margin: 26px auto 0;
+  max-width: 236px;
+}
+.band-arrow {
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 10px;
+}
+.band-arrow-left { right: auto; left: 26px; }
+.band-arrow svg { display: block; }
+
+/* ======================== Garten gallery ======================== */
+
+.garten-gallery {
+  max-width: 1440px;
+  margin: 58px auto 0;
+  padding: 0 80px;
+  display: flex;
+  gap: 21px;
+}
+.garten-gallery > div { overflow: hidden; }
+.garten-gallery .left { flex: 1333; }    /* 1700 × 1275 */
+.garten-gallery .right { flex: 750; }    /* 1100 × 1467 */
+.garten-gallery img { width: 100%; height: auto; }
+
+/* ================== Stadt / Umgebung collages =================== */
+
+.collage { max-width: 1440px; margin: 42px auto 0; }
+.collage-a img {           /* wide image flush left */
+  width: 47.9%;            /* 690 / 1440 */
+}
+.collage-band {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+  padding: 0 40px 0 43px;
+}
+.collage-band .left {
+  width: 53.9%;            /* 732 / 1358 */
+  margin-top: 50px;
+}
+.collage-band .right {
+  width: 42.2%;            /* 573 / 1358 */
+}
+.collage-band img { width: 100%; }
+
+/* Umgebung: small left, tall right, then wide left below */
+.umgebung-grid {
+  max-width: 1440px;
+  margin: 42px auto 0;
+  padding-right: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.umgebung-grid .col-l { width: 47.5%; }
+.umgebung-grid .col-r { width: 39.8%; margin-top: 30px; }
+.umgebung-grid img { width: 100%; }
+.umgebung-grid .u1 { width: 71.6%; }
+.umgebung-grid .u3 { margin: 60px 0 0 5.4%; width: 94.6%; }
+
+/* ========================= Panorama ============================= */
+
+.panorama { max-width: 1440px; margin: 55px auto 0; }
+.panorama img { width: 100%; }
+/* Google map below the panorama — loads only after visitor consent */
+.map-embed {
+  position: relative;
+  max-width: 1440px;
+  height: 350px;
+  margin: 4px auto 3px;
+  background: var(--c-beige);
+}
+.map-embed #map { position: absolute; inset: 0; }
+/* black & white basemap */
+.map-embed .leaflet-tile-pane { filter: grayscale(1); }
+.map-pin { background: none; border: none; }
+.map-pin svg { display: block; }
+.map-consent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  padding: 0 24px;
+  text-align: center;
+}
+.map-consent p { max-width: 540px; font-size: 15px; line-height: 1.5; }
+.map-consent a { color: var(--c-text); }
+.map-load {
+  border: 0;
+  border-radius: 100px;
+  padding: 13px 30px;
+  background: var(--c-dark);
+  color: #fff;
+  font-family: var(--f-nav);
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+.map-load:hover { background: #000; }
+
+/* ====================== Buchen & Kontakt ======================== */
+
+.prices {
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 582px;
+  margin: 56px auto 0;
+  padding: 0 20px;
+}
+.prices p { margin-bottom: 0; }
+.prices p.gap-above { margin-top: 32px; }
+.prices strong { font-weight: 700; }
+.prices a { color: var(--c-text); }
+
+.contact-block {
+  margin: 74px auto 0;
+  max-width: 600px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.8;
+}
+.contact-block a { color: var(--c-text); }
+
+/* ============================ Footer ============================ */
+
+.site-footer {
+  padding: 96px 0 40px;
+  text-align: center;
+}
+.footer-links,
+.footer-copy {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: normal;
+  color: var(--c-heading);
+}
+.footer-links a { color: var(--c-heading); text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; }
+.footer-links { letter-spacing: 0; }
+.footer-links a + a { margin-left: 38px; }
+.footer-copy { margin-top: 10px; letter-spacing: 0.08em; }
+
+/* ========================= Legal pages ========================== */
+
+.legal-main { min-height: 60vh; }
+.legal-title {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 27px;
+  letter-spacing: 0.1em;
+  color: var(--c-heading);
+  text-align: center;
+  margin: 50px auto 0;
+}
+.legal-content {
+  max-width: 830px;
+  margin: 68px auto 120px;
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.legal-content h2 {
+  font-family: var(--f-body);
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 36px;
+}
+.legal-content h2:first-child { margin-top: 0; }
+.legal-content p { margin-top: 0; }
+.legal-content a { color: var(--c-text); }
+
+/* ========================== Mobile ============================== */
+
+@media (max-width: 750px) {
+  html { scroll-padding-top: 62px; }
+
+  .site-header {
+    height: 62px;
+    padding: 11px 16px 0 24px;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-pill { width: 140px; height: 40px; font-size: 12px; }
+  .main-nav { display: none; }
+  .menu-toggle { display: block; position: absolute; right: 16px; top: 11px; }
+
+  .hero { height: 290px; margin: 26px 0 0; }
+  .hero-title { margin-top: 28px; font-size: 40px; }
+  .hero-sub { margin-top: 42px; font-size: 22px; max-width: 300px; }
+
+  .intro-gallery { margin-top: 26px; gap: 6px; padding: 0 42px; }
+  .intro-gallery .row { gap: 6px; }
+
+  .divider { margin-top: 34px; height: 60px; }
+  .section-title { margin-top: 38px; font-size: 24px; }
+  .section-text { font-size: 18px; margin-top: 40px; padding: 0 30px; }
+
+  .masonry { margin: 40px auto 0; padding: 0 35px; gap: 24px; }
+  .masonry .row { flex-direction: column; gap: 24px; }
+
+  .icon-band { margin-top: 60px; padding: 46px 0 50px; }
+  .icon-item { flex: 0 0 210px; }
+  .icon-item img { width: 190px; height: 190px; }
+
+  .garten-gallery { margin: 40px auto 0; padding: 0 24px; flex-direction: column; gap: 18px; }
+
+  .collage-a img { width: 100%; }
+  .collage-band { flex-direction: column; padding: 0 24px; margin-top: 18px; gap: 18px; }
+  .collage-band .left, .collage-band .right { width: 100%; margin-top: 0; }
+
+  .umgebung-grid { flex-direction: column; padding: 0 24px; gap: 18px; }
+  .umgebung-grid .col-l, .umgebung-grid .col-r { width: 100%; margin-top: 0; }
+  .umgebung-grid .u1 { width: 100%; }
+  .umgebung-grid .u3 { margin: 18px 0 0; width: 100%; }
+
+  .panorama { margin-top: 40px; }
+
+  .prices { font-size: 18px; padding: 0 30px; }
+  .contact-block { font-size: 18px; margin-top: 50px; }
+
+  .site-footer { padding: 70px 0 34px; }
+
+  .legal-content { font-size: 16px; margin: 46px auto 80px; }
+}

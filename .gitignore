@@ -1,0 +1,7 @@
+# Local working files — never commit or deploy
+reference/
+.local/
+*.local.md
+
+.claude/
+.DS_Store
